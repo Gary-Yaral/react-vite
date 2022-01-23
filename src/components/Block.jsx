@@ -1,4 +1,5 @@
-import { Item } from './Item';
+import Item from './Item';
+
 
 export function Block(props) {
  

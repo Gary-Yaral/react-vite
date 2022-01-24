@@ -2,23 +2,23 @@ import { connect } from 'react-redux';
 import { addToCart } from '../redux/actions';
 
 function Item({ item, addToCart }) {
-
+  const {name, price, url } = item;
   return (
     <div className = 'card'>
-      <img src={ item.url } alt="image" />
-      <div className="card-title">{ item.name }</div>
+      <img src={ url } alt="image" />
+      <div className="card-title">{ name }</div>
       <div className="card-price">
         <strong>Price: </strong>
-        ${ item.price }
+        ${ price }
       </div>
-      <button onClick={() => addToCart(item.id)}>Add to Cart</button>
+      <button onClick={() => addToCart(item)}>Add to Cart</button>
     </div>
   )
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToCart: (id) => dispatch(addToCart(id))
+    addToCart: (item) => dispatch(addToCart(item))
   }
 }
 

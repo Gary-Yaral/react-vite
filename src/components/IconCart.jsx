@@ -65,7 +65,7 @@ function IconCart ({ cart }) {
         { items.length > 0 ?
           (<section className="cart-footer">
             <div className="cart-total">
-              <strong>Total: $</strong>{total}
+              <strong>Total: $</strong>{total.toFixed(2)}
             </div>
             <div className='cart-buttons'>
               <button className='cart-btn btn-clear'>

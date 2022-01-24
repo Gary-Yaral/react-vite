@@ -151,7 +151,7 @@ button[type="submit"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
+  position: absolute;
   bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.671);
@@ -309,7 +309,6 @@ ion-icon[name="add-circle"]{
     width: 100%;
     z-index: 5;
     border: none;
-    position:relative;
   }
 
 }

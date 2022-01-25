@@ -1,6 +1,7 @@
 import './css/components.css'
 import { connect } from 'react-redux';
 import { useState,useEffect } from 'react';
+import Cart from './Cart'
 
 function IconCart ({ cart }) {
   const [cartCounter, setCounter] = useState(0);
@@ -40,44 +41,11 @@ function IconCart ({ cart }) {
         <div className="counterItems">{ cartCounter }</div>
         <ion-icon name="cart"></ion-icon>
       </a>
-      <section className= {!switchModal ? "cart-modal modal-hidden": "cart-modal"} >
-        <div className='cart-items-container'>
-          {
-            items.length > 0 ? items.map(item => {
-              return (
-                <div className ="cart-item" key={"item_"+item.id}>
-                  <ion-icon name="trash"></ion-icon>
-                  <img src={item.url} alt={item.name}/>
-                  <section>
-                    <h3 className="item-title">{item.name}</h3>
-                    <p>Price: ${item.price}</p>
-                    <div className='item-buttons'>
-                      <ion-icon name="remove-circle"></ion-icon>
-                      <div>{item.quantity}</div>
-                      <ion-icon name="add-circle"></ion-icon>
-                    </div>
-                  </section>
-                </div>
-              )
-            }) : "Not products yet"
-          }
-        </div>
-        { items.length > 0 ?
-          (<section className="cart-footer">
-            <div className="cart-total">
-              <strong>Total: $</strong>{total.toFixed(2)}
-            </div>
-            <div className='cart-buttons'>
-              <button className='cart-btn btn-clear'>
-                Remove all
-              </button>
-              <button className='cart-btn btn-pay'>
-                To Pay
-              </button>
-            </div>
-          </section>) : <></>
-        }
-      </section>
+      <Cart 
+        isActive = { switchModal } 
+        total = { total }
+        items = { items }
+        />
     </div>
   )
 }

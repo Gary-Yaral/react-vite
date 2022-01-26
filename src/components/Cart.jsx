@@ -1,5 +1,11 @@
 import { connect } from 'react-redux';
-import { substractToCart, addToCart, removeItem, removeAll } from '../redux/actions'
+import { 
+  substractToCart, 
+  addToCart, 
+  removeItem, 
+  removeAll, 
+  showPayment
+} from '../redux/actions'
 
 function Cart(
   {
@@ -9,7 +15,8 @@ function Cart(
     substractToCart, 
     addToCart,
     removeItem,
-    removeAll
+    removeAll,
+    showPayment
   }) {
 
   return (
@@ -44,7 +51,7 @@ function Cart(
             <button className='cart-btn btn-clear' onClick= {()=> removeAll()}>
               Remove all
             </button>
-            <button className='cart-btn btn-pay'>
+            <button className='cart-btn btn-pay' onClick = {() => showPayment()}>
               To Pay
             </button>
           </div>
@@ -59,7 +66,8 @@ const mapDispatchToProps = (dispatch) => {
     substractToCart: (id) => dispatch(substractToCart(id)),
     addToCart: (item) => dispatch(addToCart(item)),
     removeItem: (id) => dispatch(removeItem(id)),
-    removeAll: () => dispatch(removeAll())
+    removeAll: () => dispatch(removeAll()),
+    showPayment: () => dispatch(showPayment()),
   }
 }
 

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import * as Types from './action-types';
 
-export function itemsReducer(state = [], action) {
+function itemsReducer(state = [], action) {
 
   switch (action.type) {
     case Types.ADD_TO_CART:
@@ -41,7 +41,14 @@ export function itemsReducer(state = [], action) {
   }
 }
 
+function payReducer (state = false, action) {
+  if(action.type === Types.SHOW_PAYMENT) return true;
+  if(action.type === Types.HIDE_PAYMENT) return false;
+  return false;
+}
+
 
 export const rootReducer = combineReducers({
-  shop: itemsReducer
+  shop: itemsReducer,
+  pay:payReducer
 })

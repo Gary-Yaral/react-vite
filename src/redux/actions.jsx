@@ -26,3 +26,15 @@ export const removeAll = () => {
     type: Types.REMOVE_ALL,
   }
 }
+
+export const showPayment = () => {
+  return {
+    type: Types.SHOW_PAYMENT,
+  }
+}
+
+export const hidePayment = () => {
+  return {
+    type: Types.HIDE_PAYMENT,
+  }
+}

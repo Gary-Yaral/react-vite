@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import './App.css'
+import './css/App.css'
+import './css/Payment.css'
 import { Navbar } from './components/Navbar';
 import { Block } from './components/Block';
+import { connect } from 'react-redux';
+import { hidePayment } from './redux/actions';
 
 const data = [
   {
@@ -36,7 +39,7 @@ const data = [
   }
 ]
 
-function App() {
+function App({ paymentState, hidePayment}) {
   const [ sections, setSections ] = useState([...data]); 
 
   return (
@@ -49,8 +52,35 @@ function App() {
           )
         })
       }
+    <section className= {
+      paymentState === true ? "payment" : "payment payment-hidden"
+    } >
+      <button className = "payment-close" onClick = {() => hidePayment()}>Back</button>
+      <form>
+        <h2 className="payment-title">Information</h2>
+        <label htmlFor="identifier">ID</label>
+        <input type="text" id='identifier'/>
+        <label htmlFor="user-name">Name</label>
+        <input type="text" id='user-name'/>
+        <label htmlFor="last-name">Lastname</label>
+        <input type="text" id='last-name'/>
+        <input type="submit" value="Send" />
+      </form>
+    </section>
     </div>
   )
 }
 
-export default App
+const renderPayment = (state)=> {
+  return {
+    paymentState: state.pay,
+  }
+}
+
+const actionPayment = (dispatch)=> {
+  return {
+    hidePayment: () => dispatch(hidePayment())
+  }
+}
+
+export default connect(renderPayment, actionPayment)(App)

@@ -38,3 +38,19 @@ export const hidePayment = () => {
     type: Types.HIDE_PAYMENT,
   }
 }
+
+export const searchItem = (data) => {
+  return {
+    type: Types.SEARCH_ITEM,
+    payload:{
+      data
+    }
+  }
+}
+
+export const loadSections = (array) => {
+  return {
+    type: Types.LOAD_DATA,
+    payload: array
+  }
+}

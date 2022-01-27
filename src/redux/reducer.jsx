@@ -48,7 +48,29 @@ function payReducer (state = false, action) {
 }
 
 
+function searchReducer (state = [], action) {
+  if(action.type === Types.SEARCH_ITEM){
+    if (action.payload.data.length > 0 ){
+      return [...action.payload.data]
+    };
+
+    return state;
+  };
+  return state;
+}
+
+function loadReducer  (state = [], action) {
+  switch(action.type) {
+    case Types.LOAD_DATA:
+        return [...action.payload];
+    default: 
+      return state;
+  }
+}
+
 export const rootReducer = combineReducers({
   shop: itemsReducer,
-  pay:payReducer
+  pay:payReducer,
+  search: searchReducer,
+  load:loadReducer
 })

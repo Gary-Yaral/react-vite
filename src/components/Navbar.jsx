@@ -1,4 +1,4 @@
-import { Search } from './Search';
+import Search from './Search';
 import { LogoName } from './LogoName';
 import IconCart from './IconCart';
 

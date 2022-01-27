@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './css/App.css'
-import './css/Payment.css'
 import { Navbar } from './components/Navbar';
 import { Block } from './components/Block';
+import { SearchResult} from './components/SearchResult';
+import Payment from './components/Payment';
 import { connect } from 'react-redux';
-import { hidePayment } from './redux/actions';
+import { hidePayment, loadSections } from './redux/actions';
 
 const data = [
   {
@@ -16,6 +17,12 @@ const data = [
         name: 'Nike',
         price: 29.99,
         url: 'https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw0df3fa19/products/NI_AQ2730-400/NI_AQ2730-400-1.JPG'
+      },
+      {
+        id: Math.random(36),
+        name: 'Nike women',
+        price: 29.99,
+        url: 'https://i.pinimg.com/736x/6d/44/1a/6d441a6c91e5b28ea248068075e54fc7--nike-dunks-sequoia.jpg'
       },
       {
         id: Math.random(36),
@@ -39,34 +46,40 @@ const data = [
   }
 ]
 
-function App({ paymentState, hidePayment}) {
+function App({ 
+  paymentState, 
+  hidePayment, 
+  loadSections, 
+  search
+}) {
   const [ sections, setSections ] = useState([...data]); 
+  const [ searchData, setSearchData ] = useState(search); 
+  useEffect(()=>{
+    loadSections(sections);
+  },[])
 
+  useEffect(() => {
+    setSearchData(search)
+  },[search])
+  
   return (
     <div className="App">
       <Navbar />
+  
       {
-        sections.map(section => {
+        typeof search[0] === 'object' ? <SearchResult items= { search }/> :
+        typeof search[0] === 'string' ? <div className="not-results"> Not results </div>:
+        <></>
+      }
+
+      {
+        typeof search[0] === 'boolean' || search[0] === undefined ? sections.map(section => {
           return (
             <Block section = { section } key= { section.id }/>
           )
-        })
+        }) : <></>
       }
-    <section className= {
-      paymentState === true ? "payment" : "payment payment-hidden"
-    } >
-      <button className = "payment-close" onClick = {() => hidePayment()}>Back</button>
-      <form>
-        <h2 className="payment-title">Information</h2>
-        <label htmlFor="identifier">ID</label>
-        <input type="text" id='identifier'/>
-        <label htmlFor="user-name">Name</label>
-        <input type="text" id='user-name'/>
-        <label htmlFor="last-name">Lastname</label>
-        <input type="text" id='last-name'/>
-        <input type="submit" value="Send" />
-      </form>
-    </section>
+      <Payment paymentState= {paymentState} hidePayment = {hidePayment}/>
     </div>
   )
 }
@@ -74,13 +87,17 @@ function App({ paymentState, hidePayment}) {
 const renderPayment = (state)=> {
   return {
     paymentState: state.pay,
+    load:state.load,
+    search: state.search
   }
 }
 
-const actionPayment = (dispatch)=> {
+const activateReducers = (dispatch)=> {
   return {
-    hidePayment: () => dispatch(hidePayment())
+    hidePayment: () => dispatch(hidePayment()),
+    loadSections: (arr) => dispatch(loadSections(arr)),
   }
 }
 
-export default connect(renderPayment, actionPayment)(App)
+
+export default connect(renderPayment, activateReducers)(App)

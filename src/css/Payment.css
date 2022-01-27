@@ -3,18 +3,23 @@
   height: 100vh;
   position: fixed;
   z-index:10;
-  background: rgb(246, 246, 246);
+  background: rgba(0,0,0, .5);
   display:flex;
   justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
 
 .payment-close {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: -2rem;
+  right: 0;
   width: 3rem;
   height: 2rem;
   cursor: pointer;
+  background: transparent;
+  color: #fff;
+  border: none;
 }
 
 .payment form {
@@ -24,7 +29,7 @@
   grid-template-columns: 1fr;
   height: fit-content;
   gap: .5rem;
-  margin-top: 4rem;
+  position: relative;
   border: 1px solid gray;
   padding: 1rem;
 }
@@ -38,12 +43,14 @@
   padding: .5rem .8rem;
   outline: none;
   width: 100%;
+  border: 1px solid rgb(212, 212, 212);
 }
 
 .payment form input[type="submit"] {
   background:orange;
   margin-top: 1rem;
-  border: 1px solid gray;; 
+  border: none;
+  margin-bottom: 1rem; 
 }
 
 .payment-hidden {

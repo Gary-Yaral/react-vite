@@ -49,6 +49,15 @@ body {
  color: #fff;
 }
 
+.not-results{
+  color: #000;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  margin-top: 5rem;
+  width: 100%;
+}
+
 @media screen and (max-width: 550px) {
   .navbar {
     display: grid;
